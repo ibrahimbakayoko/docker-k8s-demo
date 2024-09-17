@@ -8,6 +8,6 @@ public class HelloController {
     
     @GetMapping("/hello")
     public String hello() {
-        return "Hello from Spring Boot running in Docker!";
+        return "Hello from Spring Boot running in Docker! This is welcome page for test";
     }
 }
