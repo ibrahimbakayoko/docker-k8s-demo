@@ -15,7 +15,7 @@ pipeline {
         stage('Build Maven Project') {
             agent {
                 docker {
-                    image 'maven:3.8.6-openjdk-17'
+                    image 'openjdk:17-alpine'  
                     args '-v /root/.m2:/root/.m2' // Utilisation du cache Maven pour accélérer la construction
                 }
             }

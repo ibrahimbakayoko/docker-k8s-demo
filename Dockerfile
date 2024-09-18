@@ -1,5 +1,6 @@
 # Étape de construction
-FROM maven:3.8.6-openjdk-17 AS build
+#FROM maven:3.8.6-openjdk-17 AS build
+FROM openjdk:17-alpine
 
 # Définir le répertoire de travail
 WORKDIR /app
