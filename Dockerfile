@@ -4,20 +4,25 @@ FROM maven:3.8.6-openjdk-17 AS build
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers du projet dans le conteneur
-COPY . .
+# Copier les fichiers pom.xml et télécharger les dépendances
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Construire le projet Maven
+# Copier le reste du code source et compiler le projet
+COPY src ./src
 RUN mvn clean package
 
 # Étape d'exécution
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jre-slim
 
-# Définir le répertoire de travail
+# Définir le répertoire de travail pour l'exécution
 WORKDIR /app
 
-# Copier le fichier JAR de l'étape de construction
-COPY --from=build /app/target/hello-world-0.0.1-SNAPSHOT.jar /app/hello-world-app.jar
+# Copier le fichier jar compilé de l'étape de construction
+COPY --from=build /app/target/docker-k8s-demo-0.0.1-SNAPSHOT.jar /app/docker-k8s-demo.jar
 
-# Définir le point d'entrée pour l'image Docker
-ENTRYPOINT ["java", "-jar", "/app/hello-world-app.jar"]
+# Exposer le port d'écoute de l'application
+EXPOSE 8080
+
+# Commande pour exécuter l'application
+ENTRYPOINT ["java", "-jar", "/app/docker-k8s-demo.jar"]
