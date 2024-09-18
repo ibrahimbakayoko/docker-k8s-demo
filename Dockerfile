@@ -1,5 +1,5 @@
 # Étape de construction
-FROM maven:3.8.6-eclipse-temurin-17 AS build
+FROM maven:3.8.6-openjdk-17 AS build
 
 # Définir le répertoire de travail
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY . .
 RUN mvn clean package
 
 # Étape d'exécution
-FROM eclipse-temurin:17-jdk-slim
+FROM openjdk:17-jdk-slim
 
 # Définir le répertoire de travail
 WORKDIR /app
