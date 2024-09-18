@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/ibrahimbakayoko/docker-k8s-demo.git'
+                git branch: 'main', url: 'https://github.com/ibrahimbakayoko/docker-k8s-demo.git'
             }
         }
         
