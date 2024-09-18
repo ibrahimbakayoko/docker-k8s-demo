@@ -11,7 +11,7 @@ COPY . .
 RUN mvn clean package
 
 # Étape d'exécution
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 
 # Définir le répertoire de travail
 WORKDIR /app
